@@ -1,24 +1,41 @@
-import logo from './logo.svg';
-import './App.css';
+import './App.scss';
+// import { BrowserRouter, Route, Routes } from "react-router-dom";
+// import Register from './components/Authentication/Register';
+// import Login from './components/Authentication/Login';
+// import Order from './dashboard/Order';
+// import Home from './dashboard/Home';
+import AuthRoutes from './components/Authentication/AuthRoutes';
+import { Toaster } from 'react-hot-toast';
+import FrontEndRoutes from './dashboard/FrontEndRoutes';
+import Home from './dashboard/Home';
+import Hero from './dashboard/Hero';
+import Order from './dashboard/Order';
+import ForgotPassword from './components/Authentication/ForgotPassword';
+import Register from './components/Authentication/Register';
+import Login from './components/Authentication/Login';
+import { Route, Routes } from 'react-router-dom';
+import LandingPage from './dashboard/LandingPage';
+import Cloudinary from './dashboard/Cloudinary';
+
+
 
 function App() {
+  // <Register/>
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Toaster />
+      <Routes>
+        <Route path='/' element={<Login />} />
+        <Route path='/register' element={<Register />} />
+        <Route path='/forgot-Password' element={<ForgotPassword />} />
+        <Route path='/home' element={<LandingPage />} />
+        <Route path='/add-menu' element={<Home />} />
+        <Route path='/order' element={<Order />} />
+      </Routes>
+      {/* <AuthRoutes />
+   <FrontEndRoutes /> */}
+      {/* <Cloudinary /> */}
+    </>
   );
 }
 
