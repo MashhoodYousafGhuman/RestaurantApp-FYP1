@@ -102,10 +102,10 @@ export default function Order() {
           Admin Page
         </button>
       }
-      <p className=" ms-2 mb-0 btn btn-info" onClick={showCartModal} >Check Items : {totalItemsQuantity} </p>
+      {/* <p className=" ms-2 mb-0 btn btn-info" onClick={showCartModal} >Check Items : {totalItemsQuantity} </p> */}
       {/* <p className=" ms-2 mb-0 btn btn-info"  ><Link to={'/home'} >Home</Link></p> */}
 
-      <div className="container ">
+      <div className="container" style={{}} >
         <div className="row  ">
           <div className="col">
             <h3 className="">Burgers</h3>

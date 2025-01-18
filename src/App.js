@@ -23,6 +23,8 @@ function App() {
   // <Register/>
   return (
     <>
+    <div style={{backgroundColor: '#FAFAFA'}} >
+{/* i have to make the all background-color: #FAFAFA; so i create the div and wrap the routes here and anything in it , so the all body color is same; */}
       <Toaster />
       <Routes>
         <Route path='/' element={<Login />} />
@@ -35,6 +37,7 @@ function App() {
       {/* <AuthRoutes />
    <FrontEndRoutes /> */}
       {/* <Cloudinary /> */}
+    </div>
     </>
   );
 }
