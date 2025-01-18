@@ -105,10 +105,10 @@ export default function Order() {
       {/* <p className=" ms-2 mb-0 btn btn-info" onClick={showCartModal} >Check Items : {totalItemsQuantity} </p> */}
       {/* <p className=" ms-2 mb-0 btn btn-info"  ><Link to={'/home'} >Home</Link></p> */}
 
-      <div className="container" style={{}} >
+      <div className="container"  >
         <div className="row  ">
           <div className="col">
-            <h3 className="">Burgers</h3>
+            <h3 style={{fontFamily:'inter'}} className="">Burgers</h3>
             <br />
           </div>
         </div>
@@ -118,18 +118,20 @@ export default function Order() {
             let { name, description, price, category, picture, id } = item;
             return (
               <div className=" col-12 col-sm-6  col-lg-3 mt-3 ">
-                <div key={i} className="card">
-                  <Image width={200} height={200} src={picture} />
-                  <p>{name}</p>
-                  <p>{description}</p>
-                  <p>{price}</p>
-                  <p>{category}</p>
+                <div key={i} style={styles.Card}>
+                  <div className="mb-3" style={{ display: 'flex', justifyContent: "center", paddingTop: 30, paddingRight: 20, }}>
+                    <Image width={170} height={130} src={'https://g-cdn.blinkco.io/ordering-system/55485/dish_image/1734695083.jpg'} style={{ borderRadius: 40, border: 'none' }} />
+                  </div>
+                  <p className="mb-1" style={{ fontFamily: "inter", fontWeight: 550 }} >{name}</p>
+                  {/* <p>{description}</p> */}
+                  <p style={{ fontFamily: "inter", fontWeight: 400 }}> {price}</p>
+                  {/* <p>{category}</p> */}
                   <div className="text-center mb-2">
                     <Button onClick={() => decreaseitemQuantities(id)}> - </Button>
                     <span>{itemQuantities[id] || 1} </span>
                     <Button onClick={() => increaseitemQuantities(id)}> + </Button>
                   </div>
-                  <button className="btn btn-primary" onClick={() => handleAddToCart(id)} > Add to cart </button>
+                  <button style={styles.cartBtn} className="btn btn-primary" onClick={() => handleAddToCart(id)} > Add to cart </button>
                 </div>
               </div>
             );
@@ -138,7 +140,7 @@ export default function Order() {
         {dealItems && (
           <div className="row">
             <div className="col-12">
-              <h3 className="mt-3">Deals</h3>
+              <h3 style={{fontFamily:'inter'}} className="mt-3">Deals</h3>
             </div>
             <div className="row">
               {dealItems.map((item, i) => {
@@ -146,18 +148,21 @@ export default function Order() {
                 let { name, description, price, category, picture, id } = item;
                 return (
                   <div className=" col-12 col-sm-6  col-lg-3 mt-3 ">
-                    <div key={i} className="card">
-                      <Image width={200} height={200} src={picture} />
-                      <p>{name}</p>
-                      <p>{description}</p>
-                      <p>{price}</p>
-                      <p>{category}</p>
+                    <div key={i} style={styles.Card}>
+                      {/* <Image width={200} height={200} src={picture} /> */}
+                      <div className="mb-3" style={{ display: 'flex', justifyContent: "center", paddingTop: 30, paddingRight: 20, }}>
+                        <Image width={170} height={130} src={'https://g-cdn.blinkco.io/ordering-system/55485/dish_image/1734695083.jpg'} style={{ borderRadius: 40, border: 'none' }} />
+                      </div>
+                      <p className="mb-1" style={{ fontFamily: "inter", fontWeight: 550 }} >{name}</p>
+                      <p className="mb-1" style={{ fontFamily: "inter", fontWeight: 400 }}>{description}</p>
+                      <p style={{ fontFamily: "inter", fontWeight: 400 }}>{price}</p>
+                      {/* <p>{category}</p> */}
                       <div className="text-center mb-2">
                         <Button onClick={() => decreaseitemQuantities(id)}> - </Button>
                         <span>{itemQuantities[id] || 1} </span>
                         <Button onClick={() => increaseitemQuantities(id)}> + </Button>
                       </div>
-                      <button className="btn btn-primary" onClick={() => handleAddToCart(id)} > Add to cart </button>
+                      <button style={styles.cartBtn} className="btn btn-primary" onClick={() => handleAddToCart(id)} > Add to cart </button>
                     </div>
                   </div>
                 );
@@ -168,7 +173,7 @@ export default function Order() {
         {pizzaItems.length > 0 && (
           <div className="row">
             <div className="col-12">
-              <h3 className="mt-3">Pizza</h3>
+              <h3 style={{fontFamily:'inter'}} className="mt-3">Pizza</h3>
             </div>
             <div className="row">
               {pizzaItems.map((item, i) => {
@@ -176,18 +181,21 @@ export default function Order() {
                 let { name, description, price, category, picture, id } = item;
                 return (
                   <div className=" col-12 col-sm-6  col-lg-3 mt-3 ">
-                    <div key={i} className="card">
-                      <Image width={200} height={200} src={picture} />
-                      <p>{name}</p>
-                      <p>{description}</p>
-                      <p>{price}</p>
+                    <div key={i} style={styles.Card}>
+                      {/* <Image width={200} height={200} src={picture} /> */}
+                      <div className="mb-3" style={{ display: 'flex', justifyContent: "center", paddingTop: 30, paddingRight: 20, }}>
+                        <Image width={170} height={130} src={'https://g-cdn.blinkco.io/ordering-system/55485/dish_image/1734695083.jpg'} style={{ borderRadius: 40, border: 'none' }} />
+                      </div>
+                      <p className="mb-1" style={{ fontFamily: "inter", fontWeight: 550 }} >{name}</p>
+                      {/* <p>{description}</p> */}
+                      <p style={{ fontFamily: "inter", fontWeight: 400 }}>{price}</p>
                       {/* <p>{category}</p> */}
                       <div className="text-center mb-2">
                         <Button onClick={() => decreaseitemQuantities(id)}> - </Button>
                         <span>{itemQuantities[id] || 1} </span>
                         <Button onClick={() => increaseitemQuantities(id)}> + </Button>
                       </div>
-                      <button className="btn btn-primary" onClick={() => handleAddToCart(id)} > Add to cart </button>
+                      <button style={styles.cartBtn} className="btn btn-primary" onClick={() => handleAddToCart(id)} > Add to cart </button>
                     </div>
                   </div>
                 );
@@ -217,7 +225,7 @@ export default function Order() {
             })}
           </div>
         </Modal>
-
+            <hr style={{marginTop:55 ,color:'#39DB4A'}} />
       </div>
     </>
   );
@@ -231,3 +239,20 @@ export default function Order() {
     </div>
   </div>
 </div> */}
+
+const styles = {
+  Card: {
+    backgroundColor: "#FFFFFF",
+    // height:323,
+    borderRadius: 40,
+    paddingLeft: 20,
+    // width:446,
+    boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
+  },
+  cartBtn: {
+    backgroundColor: '#39DB4A',
+    border: 'none',
+    marginTop: 8,
+    marginBottom: 18,
+  }
+}

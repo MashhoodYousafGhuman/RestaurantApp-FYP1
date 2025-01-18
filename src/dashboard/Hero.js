@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom'
 import Items from './Items'
 import { AdminContext } from '../context/AdminContextProvider'
 import Header from '../components/header&Footer/Header';
+import Footer from '../components/header&Footer/Footer';
 // import LogosBanner from '../logosBanner/LogosBanner'
 export default function Hero() {
 
@@ -55,6 +56,7 @@ export default function Hero() {
         </div>
       </div>
       <Order />
+      <Footer />
     </>
   )
 }
