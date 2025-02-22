@@ -1,14 +1,25 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { FaShoppingBasket, FaShoppingCart } from 'react-icons/fa';
 import { MdAddShoppingCart } from 'react-icons/md'
-export default function Header() {
+import logoPng from '../../assest/images/logo.png'
+import { Link, useNavigate } from 'react-router-dom';
+import { AdminContext } from '../../context/AdminContextProvider';
+export default function Header({ totalItemsQuantity }) {
+  const navigate = useNavigate();
+
+
+  const { isAdmin } = useContext(AdminContext)
+  console.log('isAdmin', isAdmin)
+  const addMenu = () => navigate("/add-menu");
+
   return (
     <>
-      <header className='' style={{ backgroundColor: ' #FAFAFA', fontFamily: "poppins", }} >
+
+      <header className='' style={{ backgroundColor: '#FAFAFA', position: "sticky", top: 0, zIndex: 100, fontFamily: "poppins", }} >
         <nav style={styles.text} className="container-fluid  navbar navbar-expand-lg bg-body-tertiary">
           <div className=" m-2  container-fluid">
-            <a className="navbar-brand" href="#">
-              Navbar
+            <a aria-disabled className="navbar-brand" href="#">
+              <img src={logoPng} style={{ width: 40 }} />
             </a>
             <button
               className="navbar-toggler"
@@ -23,30 +34,34 @@ export default function Header() {
             </button>
             <div className="collapse navbar-collapse" id="navbarSupportedContent">
               <ul style={{
-                display: "flex", // Flexbox for layout
-                justifyContent: "center", // Center horizontally
-                width: "100%", // Ensure the container spans the full width
-                // backgroundColor:'aqua'
+                display: "flex",
+                justifyContent: "center",
+                width: "100%",
               }}
                 className="navbar-nav me-auto mb-2 mb-lg-0">
-                <li className="nav-item">
+                {/* <li className="nav-item">
                   <a className="nav-link active" aria-current="page" href="#">
                     Home
                   </a>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link" href="#">
-                    Menu
-                  </a>
+                  <a aria-disabled  > Menu <Link to = {'/order'} /> </a>
+                  <Link to="/order" >Menu</Link>
                 </li>
                 <li className="nav-item">
                   <a className="nav-link " aria-disabled="true">
                     Contact
                   </a>
-                </li>
+                </li> */}
+                {
+                  isAdmin &&
+                  <li className="btn bt-info ms-2" onClick={addMenu}>
+                    Access Admin Page
+                  </li>
+                }
               </ul>
               <div className='me-4' >
-              <FaShoppingBasket size={25} color="grey"  />
+                <FaShoppingBasket size={25} color="grey" /> {totalItemsQuantity}
               </div>
               <button style={styles.shopBtn} className="btn btn-outline-success" type="submit">
                 Register/Login
@@ -69,9 +84,10 @@ const styles = {
     backgroundColor: '#39DB4A',
     border: 'none',
     borderRadius: '40px',
-    width: '160px',
+    width: '155px',
     color: "white",
-    height: '45px',
+    fontSize: 15,
+    height: '38px',
     fontFamily: "inter , serif",
   },
 }

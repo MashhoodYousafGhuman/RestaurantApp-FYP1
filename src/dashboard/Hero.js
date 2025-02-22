@@ -9,26 +9,21 @@ import Items from './Items'
 import { AdminContext } from '../context/AdminContextProvider'
 import Header from '../components/header&Footer/Header';
 import Footer from '../components/header&Footer/Footer';
+import 'animate.css';
 // import LogosBanner from '../logosBanner/LogosBanner'
 export default function Hero() {
 
   const { isAdmin } = useContext(AdminContext)
   console.log('isAdmin', isAdmin)
-
-  // const contentStyle = {
-  //   height: '90vh',
-  //   color: '#fff',
-  //   lineHeight: '160px',
-  //   textAlign: 'center',
-  //   background: '#364d79',
-  // };
   return (
     <>
       <Header/>
-      <div className="d-flex " id='hero-section' >
+      <div className="d-flex mb-5 " id='hero-section' >
         <div className="container-fluid d-flex ps-4" id='cf' >
-
+      
           <div className="bg-body-  p-4 w-50">
+          <div className="row bg-dangser">
+
             <div className="row   " id='text'>
               <div className="col ">
                 <h1 style={styles.text} className='text-' >DISCOVER FOODS THAT MATCH YOUR <span style={{color:'#39DB4A', lineHeight:'1.5'}}>TASTE</span></h1>
@@ -46,10 +41,11 @@ export default function Hero() {
               </div>
             </div>
           </div>
-          <div className="row d-flex">
-            <div className="col d-flex">
-              <div style={styles.borderImage} className="img-fluid d-flex ">
-                <img src={heroImage} style={{ width: '100%', height: '100%' }} alt="" />
+          </div>
+          <div className="row bg-warninsg">
+            <div className="col  ">
+              <div style={styles.borderImage} className="img-fluid ">
+                <img className='animate' src={heroImage} style={{ width: '100%', height: '100%' }} alt="burgerImage" />
               </div>
             </div>
           </div>

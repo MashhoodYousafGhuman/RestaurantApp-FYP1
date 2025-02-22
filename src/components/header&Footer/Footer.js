@@ -1,6 +1,6 @@
 import React from 'react'
 import SubFooter from './SubFooter'
-
+import logoPng from '../../assest/images/logo.png'
 export default function Footer() {
   return (
     <>
@@ -9,9 +9,10 @@ export default function Footer() {
           <div className="row -body-secondary">
             <div className="col">
               {/* col1 */}
+              <img src={logoPng} alt="logoImage" style={{width:75,}} />
               <div className="col1 -black">
                 <div style={{ width: 180, fontFamily: 'inter', }} className="text">
-                  <p>Savor the artistry where every dish is a <span style={{color:'#39DB4A',fontWeight:600}}>culinary</span> masterpiece</p>
+                  {/* <p>Savor the artistry where every dish is a <span style={{color:'#39DB4A',fontWeight:600}}>culinary</span> masterpiece</p> */}
                 </div>
               </div>
             </div>

@@ -36,7 +36,7 @@ export default function Order() {
     setMenu(array)
   }
   useEffect(() => { fetchData() }, [])
-  const addMenu = () => navigate("/add-menu");
+  // const addMenu = () => navigate("/add-menu");
 
   // const increaseitemQuantities = (id) => {
   //     setitemQuantities((s)=> ({...s , [id] : (s[id] || 0 ) + 1}) ) 
@@ -97,17 +97,17 @@ export default function Order() {
   console.log('burgerItems', burgerItems)
   return (
     <>
-      {isAdmin &&
+      {/* {isAdmin &&
         <button className="btn btn-info ms-2" onClick={addMenu}>
           Admin Page
         </button>
-      }
+      } */}
       {/* <p className=" ms-2 mb-0 btn btn-info" onClick={showCartModal} >Check Items : {totalItemsQuantity} </p> */}
       {/* <p className=" ms-2 mb-0 btn btn-info"  ><Link to={'/home'} >Home</Link></p> */}
 
       <div className="container"  >
-        <div className="row  ">
-          <div className="col">
+        <div className="row ">
+          <div className="col ">
             <h3 style={{fontFamily:'inter'}} className="">Burgers</h3>
             <br />
           </div>
@@ -117,7 +117,7 @@ export default function Order() {
             if (!item) return null;
             let { name, description, price, category, picture, id } = item;
             return (
-              <div className=" col-12 col-sm-6  col-lg-3 mt-3 ">
+              <div className=" col-6 col-lg-3 mt-0 mb-3 ">
                 <div key={i} style={styles.Card}>
                   <div className="mb-3" style={{ display: 'flex', justifyContent: "center", paddingTop: 30, paddingRight: 20, }}>
                     <Image width={170} height={130} src={'https://g-cdn.blinkco.io/ordering-system/55485/dish_image/1734695083.jpg'} style={{ borderRadius: 40, border: 'none' }} />
@@ -128,19 +128,20 @@ export default function Order() {
                   {/* <p>{category}</p> */}
                   <div className="text-center mb-2">
                     <Button onClick={() => decreaseitemQuantities(id)}> - </Button>
-                    <span>{itemQuantities[id] || 1} </span>
+                    <span> {itemQuantities[id] || 1 } </span>
                     <Button onClick={() => increaseitemQuantities(id)}> + </Button>
                   </div>
                   <button style={styles.cartBtn} className="btn btn-primary" onClick={() => handleAddToCart(id)} > Add to cart </button>
                 </div>
               </div>
             );
-          })}
+          })
+          }
         </div>
         {dealItems && (
           <div className="row">
             <div className="col-12">
-              <h3 style={{fontFamily:'inter'}} className="mt-3">Deals</h3>
+              <h3 style={{fontFamily:'inter'}} className="mt-5 mb-4">Deals</h3>
             </div>
             <div className="row">
               {dealItems.map((item, i) => {
@@ -173,7 +174,7 @@ export default function Order() {
         {pizzaItems.length > 0 && (
           <div className="row">
             <div className="col-12">
-              <h3 style={{fontFamily:'inter'}} className="mt-3">Pizza</h3>
+              <h3 style={{fontFamily:'inter'}} className="mt-5 mb-4">Pizza</h3>
             </div>
             <div className="row">
               {pizzaItems.map((item, i) => {
@@ -230,15 +231,6 @@ export default function Order() {
     </>
   );
 }
-
-{/* <div class="row ">
-  <div class="col-12 col-sm-6  col-lg-3 mt-3 " id="mart">
-    <div class="card border-0  ">
-      <img src="./WhatsApp Image 2024-02-27 at 9.50.27 AM (1).jpeg" alt="" />
-        <span class="bg-black text-white  position-absolute py-2 px-3"> Barn House</span>
-    </div>
-  </div>
-</div> */}
 
 const styles = {
   Card: {
