@@ -1,16 +1,12 @@
 import React, { useContext } from 'react'
 import heroImage from "../assest/images/burger-food_884653-6867.jpg"
-// import vectorPng from '../assets/pngs/heroImage.png'
 import './hero.scss'
 import Order from './Order'
-import { Carousel } from 'antd';
-import { Link } from 'react-router-dom'
-import Items from './Items'
 import { AdminContext } from '../context/AdminContextProvider'
 import Header from '../components/header&Footer/Header';
 import Footer from '../components/header&Footer/Footer';
 import 'animate.css';
-// import LogosBanner from '../logosBanner/LogosBanner'
+
 export default function Hero() {
 
   const { isAdmin } = useContext(AdminContext)
@@ -26,26 +22,26 @@ export default function Hero() {
 
             <div className="row   " id='text'>
               <div className="col ">
-                <h1 style={styles.text} className='text-' >DISCOVER FOODS THAT MATCH YOUR <span style={{color:'#39DB4A', lineHeight:'1.5'}}>TASTE</span></h1>
+                <h1 style={styles.text} className='text' >DISCOVER FOODS THAT MATCH YOUR <span style={{color:'#39DB4A', lineHeight:'1.5'}}>TASTE</span></h1>
 
               </div>
             </div>
             <div className="row pt-1">
               <div className="col">
-                <p className='' style={{fontFamily:"Inter , serif", fontWeight:500, color:'#4A4A4A'}}  >Delicious Pizza's, Burgers and much more</p>
+                <p className='delicousLine' style={{fontFamily:"Inter , serif", fontWeight:500, color:'#4A4A4A'}}  >Delicious Pizza's, Burgers and much more</p>
               </div>
             </div>
             <div className="row">
               <div className="col">
-                <button className='shopBtn' style={styles.shopBtn} ><Link style={{textDecoration:'none',color: 'white',fontFamily:'inter , serif', fontWeight:400 }} to={'/order'}>Order Now</Link></button>
+                <button className='shopBtn' style={styles.shopBtn} >Order Now</button>
               </div>
             </div>
           </div>
           </div>
-          <div className="row bg-warninsg">
+          <div className="row d-none d-sm-block bg-warninsg">
             <div className="col  ">
               <div style={styles.borderImage} className="img-fluid ">
-                <img className='animate' src={heroImage} style={{ width: '100%', height: '100%' }} alt="burgerImage" />
+                <img className='animate  img-fluid' src={heroImage}  style={{ width: '100%', height: '100%' }} alt="burgerImage" />
               </div>
             </div>
           </div>
@@ -75,6 +71,6 @@ const styles = {
     borderRadius: '40px',
     width: '120px',
     height: '45px',
-    
+    color:'white'
 },
 }

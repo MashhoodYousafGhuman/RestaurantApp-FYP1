@@ -1,21 +1,55 @@
-import React, { createContext, useReducer } from 'react'
-export const AdminContext = createContext()
-const initialState = { isAdmin: false, isAuthenicate: false, user: {} }
-export default function AdminContextProvider({ children }) {
-    const reducer = (state, { type, payload }) => {
-        console.log('Reducer received:', { type, payload });
-        switch (type) {
-            case 'SET_USER_LOGIN': return { ...state, isAdmin: false, isAuthenicate: true, user: payload.user };
-            case 'SET_ADMIN': return { ...state, isAdmin: true, isAuthenicate: true, user: payload.user }
-            case 'SET_LOGOUT': return initialState
-            default: return state
-        }
+import React, { createContext, useReducer } from 'react';
 
-    }
-    const [state, dispatch] = useReducer(reducer, initialState)
-    return (
-        <AdminContext.Provider value={{ ...state, dispatch }}>
-            {children}
-        </AdminContext.Provider>
-    )
+export const AdminContext = createContext();
+
+const getInitialState = () => {
+  const isAdminFromStorage = localStorage.getItem('isAdmin') === 'true';
+  return {
+    isAdmin: isAdminFromStorage,
+    isAuthenticated: isAdminFromStorage, 
+    user: {}, 
+  };
+};
+
+const reducer = (state, { type, payload }) => {
+  switch (type) {
+    case 'SET_USER_LOGIN':
+      localStorage.setItem('isAdmin', 'false');
+      return {
+        ...state,
+        isAdmin: false,
+        isAuthenticated: true,
+        user: payload.user,
+      };
+
+    case 'SET_ADMIN':
+      localStorage.setItem('isAdmin', 'true');
+      return {
+        ...state,
+        isAdmin: true,
+        isAuthenticated: true,
+        user: payload.user,
+      };
+
+    case 'SET_LOGOUT':
+      localStorage.removeItem('isAdmin');
+      return {
+        isAdmin: false,
+        isAuthenticated: false,
+        user: {},
+      };
+
+    default:
+      return state;
+  }
+};
+
+export default function AdminContextProvider({ children }) {
+  const [state, dispatch] = useReducer(reducer, getInitialState());
+
+  return (
+    <AdminContext.Provider value={{ ...state, dispatch }}>
+      {children}
+    </AdminContext.Provider>
+  );
 }

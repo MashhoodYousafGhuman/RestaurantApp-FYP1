@@ -1,11 +1,8 @@
 import React, { useState } from 'react';
-import './register.scss'; // import your CSS file here if needed
 import { getAuth, onAuthStateChanged, sendPasswordResetEmail, } from "firebase/auth";
-// import auth from '../config/firebase'
 import { Button } from 'antd';
 import toast from 'react-hot-toast';
 import { Link, useNavigate } from 'react-router-dom';
-// import { Link } from 'react-router-dom';
 
 // const provider = new GoogleAuthProvider();
 const ForgotPassword = () => {

@@ -1,29 +1,60 @@
-#hero-section{
-    color: black;
-    #cf{
-        display: flex;
-        height: 90vh;
-        
-        align-items: center;
-        background-color: #FAFAFA;
-        justify-content: space-around;
-        padding-left: 125px;
-    }
-    .animate{
+#hero-section {
+  color: black;
 
-        // transition: transform 0.3s ease;
-        animation: resize 13s infinite alternate;
-        transform-origin: center; 
-        // &:hover{
-        //     animation: resize 
-        // }
+  #cf {
+    display: flex;
+    height: 90vh;
+    align-items: center;
+    background-color: #FAFAFA;
+    justify-content: space-around;
+    padding-left: 125px;
+  }
+
+  .animate {
+    animation: resize 13s infinite alternate;
+    transform-origin: center;
+  }
+
+  @keyframes resize {
+    0% {
+      transform: scale(1);
     }
-    @keyframes resize {
-        0% {
-          transform: scale(1); /* Initial size */
-        }
-        100% {
-          transform: scale(2); /* Maximum size */
-        }
-      }
+    100% {
+      transform: scale(2);
+    }
+  }
+
+  // ✅ Mobile Styling
+  @media (max-width: 576px) {
+    #cf {
+      flex-direction: column;         // Stack items vertically
+      height: auto;                   // Let it grow with content
+      padding-left: 20px !important;  // Less left space
+      padding-right: 20px !important; // Add right balance
+      align-items: flex-start;        // Align content to left
+      // padding-left: 10px;
+
+    }
+
+    .text {
+      font-size: 36px;
+      // text-align: left;
+      margin: 0;
+      padding-left: 10px;
+    }
+    .delicousLine{
+      font-size: 17px;
+      text-align: left;
+      margin: 0;
+      padding-left: 10px;
+    }
+
+    .shopBtn {
+      margin-top: 10px;
+    }
+
+    .animate {
+      display: none !important; // just in case d-none missed it
+    }
+  }
 }

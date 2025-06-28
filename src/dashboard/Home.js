@@ -5,27 +5,58 @@ import { collection, deleteDoc, doc, getDocs, query, setDoc } from "firebase/fir
 import { firestore } from '../config/firebase';
 import toast from 'react-hot-toast';
 
-const initialState = { name: '', description: '', price: '', category: '' };
-
+const initialState = { name: '', description: '', price: '', category: '', picture: '' };
+// home.js is admin route page
 export default function Home() {
   const getRandomId = () => Math.random().toString(36).slice(2);
   const [state, setState] = useState(initialState);
-  const [fileUrlPath, setFileUrlPath] = useState('');
+  // const [fileUrlPath, setFileUrlPath] = useState('');
   const [menu, setMenu] = useState([]);
   const [menuForEdit, setMenuForEdit] = useState({});
   const [showModal, setShowModal] = useState(false);
   const [updateModal, setUpdateModal] = useState(false);
   const navigate = useNavigate();
-  
-  const { name, description, price, category } = state;
 
-  const handleChange = (e) => {
+  const { name, description, price, category, picture } = state;
+
+  const handleChange = async (e) => {
     if (e.target.name === 'picture') {
       const file = e.target.files[0];
       if (file) {
-        const fileUrl = URL.createObjectURL(file);
-        setFileUrlPath(fileUrl);
-        setState((s) => ({ ...s, picture: fileUrl }));
+        // const fileUrl = URL.createObjectURL(file);
+        try {
+          const formData = new FormData();
+          formData.append('file', file);
+          formData.append('upload_preset', 'restaurant-app'); //  your preset name
+          formData.append('cloud_name', 'dblqccgby'); //  your Cloudinary cloud name
+          const res = await fetch('https://api.cloudinary.com/v1_1/dblqccgby/image/upload', {
+            method: 'POST',
+            body: formData,
+          });
+
+          if (!res.ok) {
+            throw new Error('Image upload failed');
+          }
+
+          const data = await res.json();
+          console.log('Cloudinary response:', data)
+
+          // setFileUrlPath(data.secure_url);
+          // setState((s) => ({ ...s, picture: data.secure_url }));
+          setState((s) => {
+            const updated = { ...s, picture: data.secure_url };
+            console.log('Updated state:', updated);
+            return updated;
+          });
+
+          console.log('state:', state)
+          // console.log('fileUrlPath:', fileUrlPath)
+          // setFileUrlPath(fileUrl);
+          // setState((s) => ({ ...s, picture: fileUrl }));
+        } catch (error) {
+          console.error('Upload error:', error.message);
+          alert('Image upload failed. Please try again.');
+        }
       }
     } else {
       setState((s) => ({ ...s, [e.target.name]: e.target.value }));
@@ -33,10 +64,14 @@ export default function Home() {
   };
 
   const AddingItem = async () => {
-    const menuData = { id: getRandomId(), name, description, price, category, fileUrlPath };
+    const menuData = { id: getRandomId(), name, description, price, category, picture };
+    // console.log('fileUrlPath while adding doc', fileUrlPath)
 
+    console.log('Adding menu item:', menuData);
     try {
       await setDoc(doc(firestore, 'Menus', menuData.id), menuData);
+
+      console.log('Adding menu item:', menuData);
       toast.success('Item Added Successfully');
       setShowModal(false);
       setMenu([...menu, menuData]);
@@ -95,7 +130,7 @@ export default function Home() {
     <>
       <Space>
         <p className="ms-2 mb-0 btn btn-info">
-          <Link to={'/home'}>Home</Link>
+          <Link to={'/'}>Home</Link>
         </p>
         <Button onClick={() => setShowModal(true)} type="primary">Add Menu</Button>
         <Button onClick={readMenu} type="warning">Read Menu</Button>
@@ -128,7 +163,7 @@ export default function Home() {
           {menu.map((item, i) => (
             <div className="col-12 col-sm-6 col-lg-3 mt-3" key={i}>
               <div className="card">
-                <Image width={200} height={200} src={item.fileUrlPath} />
+                <Image width={200} height={200} src={item.picture} />
                 <h3>{item.name}</h3>
                 <h3>{item.description}</h3>
                 <h3>{item.price}</h3>

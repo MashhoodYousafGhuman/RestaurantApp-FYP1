@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import './register.scss'; // import your CSS file here if needed
 import { getAuth, createUserWithEmailAndPassword, sendEmailVerification, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { Button, Space } from 'antd';
 import { Link } from 'react-router-dom';
@@ -10,7 +9,6 @@ const initialState = { email: '', password: '' }
 const Register = () => {
   const [user, setUser] = useState(initialState)
   const handleValue = (e) => setUser((s) => ({ ...s, [e.target.name]: e.target.value }))
-  // console.log('user', user)
 
   function signInWithGoogle() {
     const auth = getAuth();
@@ -22,7 +20,6 @@ const Register = () => {
         // You can save user info or redirect them here
       })
       .catch((error) => {
-        // Handle errors here
         console.error("Error during Google Sign-In:", error);
       });
   }
@@ -51,7 +48,6 @@ const Register = () => {
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
-        // console.log('user Registeration Failed')
         console.log('errorMessage', errorMessage)
         toast.error('error while registering user')
         // ..
